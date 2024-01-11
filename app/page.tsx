@@ -8,7 +8,7 @@ export default async function Index() {
    */
   return (
     <div className={styles.page}>
-      <div className="wrapper">
+      <div className="w-full">
         <div className="container">
           <div id="welcome">
             <h1>
