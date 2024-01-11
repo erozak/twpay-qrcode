@@ -1,4 +1,13 @@
+import { Inter as FontSans } from "next/font/google";
+
+import { cn } from '@twpay-qrcode/utils';
+
 import './global.css';
+
+export const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
 
 export const metadata = {
   title: 'Welcome to twpay-qrcode',
@@ -12,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}>{children}</body>
     </html>
   );
 }
