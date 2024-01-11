@@ -1,0 +1,6 @@
+{
+  "conventionalCommits.promptBody": false,
+  "conventionalCommits.promptFooter": false,
+  "conventionalCommits.promptScopes": false,
+  "conventionalCommits.showNewVersionNotes": false
+}
