@@ -1,6 +1,6 @@
 import * as s from 'superstruct';
 
-export const TaiwainPayQRCodePayload = s.intersection([
+export const QRCodePayload = s.intersection([
   s.object({
     bankCode: s.pattern(s.string(), /^\d{3}$/),
     accountNo: s.pattern(s.string(), /^\d{1,16}$/),
@@ -9,8 +9,9 @@ export const TaiwainPayQRCodePayload = s.intersection([
   s.partial(
     s.object({
       message: s.pattern(s.string(), /^\w{0,19}$/i),
+      timestamp: s.number(),
     })
   ),
 ]);
 
-export type TaiwainPayQRCodePayload = s.Infer<typeof TaiwainPayQRCodePayload>;
+export type QRCodePayload = s.Infer<typeof QRCodePayload>;
