@@ -15,37 +15,43 @@ type NormalizedTaiwanPayRemittancePayload = Record<
   string
 > & {
   currentTime: string;
-}
+};
 
 /**
  * doc: https://www.ptt.cc/bbs/MobilePay/M.1543779469.A.577.html
  */
-export function createTaiwanPayRemittanceUrl(payload: TaiwanPayRemittancePayload): URL {
+export function createTaiwanPayRemittanceUrl(
+  payload: TaiwanPayRemittancePayload
+): URL {
   const normalized = normalizePayload(payload);
 
-  const url = new URL(`twqrp://${BASE_PATHNAME}/${COUNTRY_CODE}/${SERVICE_CODE}/${VERSION}`);
+  const url = new URL(
+    `twqrp://${BASE_PATHNAME}/${COUNTRY_CODE}/${SERVICE_CODE}/${VERSION}`
+  );
 
-  const params: Array<[key: string, value: string  | undefined]> = [
+  const params: Array<[key: string, value: string | undefined]> = [
     ['D1', normalized.amount],
     ['D5', normalized.bankCode],
     ['D6', normalized.accountNo],
     ['D9', normalized.message],
     ['D97', normalized.currentTime],
-  ]
+  ];
 
   params.forEach(([key, value]) => {
     if (value) {
       url.searchParams.append(key, value);
     }
-  })
+  });
 
-  return url
-};
+  return url;
+}
 
-function normalizePayload(payload: TaiwanPayRemittancePayload): NormalizedTaiwanPayRemittancePayload {
+function normalizePayload(
+  payload: TaiwanPayRemittancePayload
+): NormalizedTaiwanPayRemittancePayload {
   const now = new Date();
 
-  let result: Partial<NormalizedTaiwanPayRemittancePayload> = {} ;
+  let result: Partial<NormalizedTaiwanPayRemittancePayload> = {};
 
   return {
     bankCode: payload.bankCode,
@@ -69,17 +75,16 @@ function normalizePayload(payload: TaiwanPayRemittancePayload): NormalizedTaiwan
     get currentTime(): string {
       const now = new Date();
 
-        return [
-          now.getFullYear(),
-          ...[
-
+      return [
+        now.getFullYear(),
+        ...[
           now.getMonth() + 1,
           now.getDate(),
           now.getHours(),
           now.getMinutes(),
           now.getSeconds(),
-          ].map((value) => value.toString().padStart(2, '0')),
-        ].join('');
+        ].map((value) => value.toString().padStart(2, '0')),
+      ].join('');
     },
   };
 }

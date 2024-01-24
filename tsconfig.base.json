@@ -10,20 +10,13 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@twpay-qrcode/ui": [
-        "components/ui/index.ts"
-      ],
-      "@twpay-qrcode/utils": [
-        "utils/index.ts"
-      ]
+      "@twpay-qrcode/ui": ["components/ui/index.ts"],
+      "@twpay-qrcode/utils": ["utils/index.ts"]
     }
   },
   "exclude": [

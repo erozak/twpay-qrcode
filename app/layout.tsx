@@ -1,13 +1,13 @@
-import { Inter as FontSans } from "next/font/google";
+import { Inter as FontSans } from 'next/font/google';
 
 import { cn } from '@twpay-qrcode/utils';
 
 import './global.css';
 
 export const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-})
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
 
 export const metadata = {
   title: 'Taiwan Pay QR Code Generator',
@@ -23,9 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          'min-h-screen bg-background font-sans antialiased',
           fontSans.variable
-        )}>{children}</body>
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }
