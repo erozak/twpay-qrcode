@@ -26,16 +26,16 @@ export function fromQRCodePayloadToURL(payload: QRCodePayload): URL {
   ];
 
   params.forEach(([key, value]) => {
-    if (value) {
-      url.searchParams.append(key, value);
-    }
+    if (value == null) return;
+
+    url.searchParams.append(key, value);
   });
 
   return url;
 }
 
 type NormalizedRemittancePayload = {
-  [key in keyof QRCodePayload]: string;
+  [key in keyof QRCodePayload]: string | undefined;
 };
 
 function normalizePayload(payload: QRCodePayload): NormalizedRemittancePayload {
@@ -44,15 +44,17 @@ function normalizePayload(payload: QRCodePayload): NormalizedRemittancePayload {
   return {
     bankCode: payload.bankCode,
     message: payload.message,
-    get amount(): string {
+    get amount() {
+      if (payload.amount == null) return;
+
       // Take 2 decimal places
       // e.g. 1.2345 => 123
       return Math.floor(payload.amount * 100).toString();
     },
-    get accountNo(): string {
+    get accountNo() {
       return payload.accountNo.padStart(16, '0');
     },
-    get timestamp(): string {
+    get timestamp() {
       return [
         now.getFullYear(),
         ...[
