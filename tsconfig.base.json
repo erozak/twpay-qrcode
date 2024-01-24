@@ -21,6 +21,9 @@
       "@twpay-qrcode/ui": [
         "components/ui/index.ts"
       ],
+      "@twpay-qrcode/components/*": [
+        "components/*"
+      ],
       "@twpay-qrcode/utils": [
         "utils/index.ts"
       ],
