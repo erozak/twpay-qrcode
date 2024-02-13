@@ -1,33 +1,42 @@
 'use client';
 
 import { QRCodePaylaodForm } from '@twpay-qrcode/components/qr-code-payload-form';
-import { Button } from '@twpay-qrcode/ui';
+import { Button, Card, CardContent, CardFooter } from '@twpay-qrcode/ui';
+import { useId } from 'react';
 
-export default async function Index() {
+export default function Index() {
+  const formId = useId();
+
   return (
     <main className="container py-16">
-      <h1 className="text-3xl text-center mb-8 font-bold">
-        Taiwan Pay QR Code Generator
-      </h1>
-      <div className="flex items-stretch border rounded-lg py-6 bg-white">
-        <QRCodePaylaodForm
-          className="flex-1 px-8 border-r border-input"
-          onSubmit={(values) => {
-            console.log('submit', values);
-          }}
-        >
-          <div className="col-start-4 col-span-1 flex flex-row-reverse gap-4">
-            <Button type="submit">Submit</Button>
-            <Button type="reset" variant="ghost">
+      <div className="mb-12 text-center">
+        <h1 className="text-3xl font-bold mb-4">Howazin</h1>
+        <p className="text-xl">
+          Generate QR code and share it with your friends to make they pay you
+          easily.
+          <br />
+          Just fill in the form below and click generate.
+        </p>
+      </div>
+      <div className="flex justify-center items-center">
+        <Card className="w-[385px]">
+          <CardContent>
+            <QRCodePaylaodForm
+              id={formId}
+              onSubmit={(values) => {
+                console.log('submit', values);
+              }}
+            />
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button type="reset" variant="ghost" form={formId}>
               Reset
             </Button>
-          </div>
-        </QRCodePaylaodForm>
-        <div className="flex items-center justify-center px-8">
-          <div className="flex items-center justify-center w-[320px] h-[320px] border-dashed border rounded-md">
-            <p className="text-muted-foreground">TaiwanPay QR Code</p>
-          </div>
-        </div>
+            <Button type="submit" form={formId}>
+              Generate
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
     </main>
   );
