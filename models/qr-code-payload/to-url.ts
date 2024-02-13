@@ -1,6 +1,6 @@
 import { type QRCodePayload } from './schema';
 
-const BASE_PATHNAME = 'remittance'; // This can be any string
+const BASE_PATHNAME = 'transfer'; // This can be any string
 const COUNTRY_CODE = '158';
 const SERVICE_CODE = '02';
 const VERSION = 'v1';
