@@ -28,7 +28,18 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        {children}
+        <main className="container py-16">
+          <div className="mb-12 text-center">
+            <h1 className="text-6xl font-bold mb-4">Howazin</h1>
+            <p className="text-l font-semibold">
+              Generate QR code and share it with your friends to make they pay
+              you easily.
+              <br />
+              Just fill in the form below and click generate.
+            </p>
+          </div>
+          {children}
+        </main>
       </body>
     </html>
   );
