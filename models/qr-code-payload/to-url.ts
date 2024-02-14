@@ -22,7 +22,7 @@ export function fromQRCodePayloadToURL(payload: QRCodePayload): URL {
     ['D5', normalized.bankCode],
     ['D6', normalized.accountNo],
     ['D9', normalized.message],
-    ['D97', normalized.timestamp],
+    // ['D97', normalized.timestamp], // FIXME: Cannot be accepted by the bank
   ];
 
   params.forEach(([key, value]) => {
@@ -43,7 +43,9 @@ function normalizePayload(payload: QRCodePayload): NormalizedRemittancePayload {
 
   return {
     bankCode: payload.bankCode,
-    message: payload.message,
+    get message() {
+      return payload.message || undefined;
+    },
     get amount() {
       if (payload.amount == null) return;
 
