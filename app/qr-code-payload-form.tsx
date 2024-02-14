@@ -19,6 +19,7 @@ import {
   FormControl,
   FormMessage,
   Input,
+  Separator,
 } from '@twpay-qrcode/components/ui';
 
 export interface QRCodePayloadFormValues {
@@ -120,6 +121,10 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
             </FormItem>
           )}
         />
+      </div>
+      <div className="col-span-6 flex gap-4 items-center">
+        <span className="h-[1px] flex-1 bg-border" />
+        <span className="text-xs text-muted-foreground">Advanced Options</span>
       </div>
       <div className="col-span-6">
         <FormField

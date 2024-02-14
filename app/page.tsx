@@ -39,9 +39,12 @@ export default function Index() {
                 }}
               />
             </CardContent>
-            <CardFooter className="flex justify-end">
+            <CardFooter className="flex justify-between">
               <Button type="reset" variant="ghost" form={formId}>
                 Reset
+              </Button>
+              <Button type="submit" variant="default" form={formId}>
+                Create
               </Button>
             </CardFooter>
           </div>
