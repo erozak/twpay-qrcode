@@ -1,8 +1,10 @@
 'use client';
 
-import { QRCodePaylaodForm } from '@twpay-qrcode/components/qr-code-payload-form';
-import { Button, Card, CardContent, CardFooter } from '@twpay-qrcode/ui';
 import { useId } from 'react';
+
+import { Button, Card, CardContent, CardFooter } from '@twpay-qrcode/ui';
+
+import { QRCodePaylaodForm } from './qr-code-payload-form';
 
 export default function Index() {
   const formId = useId();

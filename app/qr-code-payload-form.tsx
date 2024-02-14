@@ -10,7 +10,6 @@ import {
 } from 'react';
 
 import { cn } from '@twpay-qrcode/utils';
-
 import {
   Form,
   FormField,
@@ -19,7 +18,7 @@ import {
   FormControl,
   FormMessage,
   Input,
-} from './ui';
+} from '@twpay-qrcode/components/ui';
 
 export interface QRCodePayloadFormValues {
   bankCode: string;
