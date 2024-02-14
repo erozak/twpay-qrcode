@@ -1,5 +1,5 @@
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
-const { fontFamily } = require('tailwindcss/defaultTheme');
+const { fontFamily, screens } = require('tailwindcss/defaultTheme');
 const { join } = require('path');
 
 /** @type {import('tailwindcss').Config} */
@@ -14,9 +14,13 @@ module.exports = {
   ],
   prefix: '',
   theme: {
+    screens: {
+      ...screens,
+      xs: '375px',
+    },
     container: {
       center: true,
-      padding: '2rem',
+      padding: '1rem',
       screens: {
         '2xl': '1400px',
       },

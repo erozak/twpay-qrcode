@@ -76,11 +76,11 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
         form.reset(initializeFormValues());
       }}
       className={cn(
-        'grid grid-cols-6 grid-flow-row gap-4 text-right',
+        'grid grid-cols-12 grid-flow-row gap-4 text-right',
         className
       )}
     >
-      <div className="col-span-2">
+      <div className="sm:col-span-5 col-span-12">
         <FormField
           control={form.control}
           name="bankCode"
@@ -101,7 +101,7 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
           )}
         />
       </div>
-      <div className="col-span-4">
+      <div className="sm:col-span-7 col-span-12">
         <FormField
           control={form.control}
           name="accountNo"
@@ -122,11 +122,11 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
           )}
         />
       </div>
-      <div className="col-span-6 flex gap-4 items-center">
+      <div className="col-span-12 flex gap-4 items-center">
         <span className="h-[1px] flex-1 bg-border" />
         <span className="text-xs text-muted-foreground">Advanced Options</span>
       </div>
-      <div className="col-span-6">
+      <div className="col-span-12">
         <FormField
           control={form.control}
           name="amount"
@@ -147,7 +147,7 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
           )}
         />
       </div>
-      <div className="col-span-6">
+      <div className="col-span-12">
         <FormField
           control={form.control}
           name="note"

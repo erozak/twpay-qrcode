@@ -10,6 +10,7 @@ import {
 } from './qr-code-payload-form';
 import { TransferQRCodeImage } from './transfer-qr-code-image';
 import { Separator } from '@twpay-qrcode/components/ui';
+import { cn } from 'utils/cn';
 
 export default function Index() {
   const formId = useId();
@@ -18,8 +19,13 @@ export default function Index() {
 
   return (
     <div className="flex justify-center items-center">
-      <Card className="flex flex-row">
-        <div className="flex flex-col w-[385px]">
+      <Card
+        className={cn(
+          'flex flex-row w-full max-w-[770px]',
+          values ? 'max-w-[770px]' : 'max-w-[385px]'
+        )}
+      >
+        <div className="flex flex-col flex-1">
           <CardContent className="flex-1">
             <QRCodePaylaodForm
               id={formId}
@@ -29,12 +35,9 @@ export default function Index() {
               }}
             />
           </CardContent>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="flex gap-4 justify-between items-stretch xs:flex-row flex-col">
             <Button type="reset" variant="ghost" form={formId}>
               Reset
-            </Button>
-            <Button type="submit" variant="default" form={formId}>
-              Create
             </Button>
           </CardFooter>
         </div>
@@ -43,7 +46,7 @@ export default function Index() {
             <div className="py-6">
               <Separator orientation="vertical" />
             </div>
-            <div className="flex flex-col w-[385px]">
+            <div className="flex flex-col flex-1">
               <CardContent className="flex flex-1 justify-center items-center">
                 <TransferQRCodeImage
                   size={218}
@@ -57,8 +60,8 @@ export default function Index() {
                 />
               </CardContent>
               <CardFooter className="flex justify-center gap-4">
-                <Button variant="ghost">Share</Button>
-                <Button variant="ghost">Download</Button>
+                <Button variant="outline">Share</Button>
+                <Button variant="outline">Download</Button>
               </CardFooter>
             </div>
           </>

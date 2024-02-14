@@ -19,6 +19,8 @@ export function TransferQRCodeImage({
   return (
     <QRCode
       {...qrCodeProps}
+      fgColor="currentColor"
+      bgColor="transparent"
       value={url
         .toString()
         // Some bank apps only support uppercase protocol

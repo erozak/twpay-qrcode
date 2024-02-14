@@ -3,6 +3,7 @@ import { Inter as FontSans } from 'next/font/google';
 import { cn } from '@twpay-qrcode/utils';
 
 import './global.css';
+import { RootLayoutFooter } from './layout-footer';
 
 export const fontSans = FontSans({
   subsets: ['latin'],
@@ -28,7 +29,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <main className="container py-16">
+        <main className="container xl:py-22 lg:py-16 sm:py-10 py-6">
           <div className="mb-12 text-center">
             <h1 className="text-6xl font-bold mb-4">Howazin</h1>
             <p className="text-l font-semibold">
@@ -39,6 +40,7 @@ export default function RootLayout({
             </p>
           </div>
           {children}
+          <RootLayoutFooter />
         </main>
       </body>
     </html>
