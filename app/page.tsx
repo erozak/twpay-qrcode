@@ -1,13 +1,19 @@
 'use client';
 
-import { useId } from 'react';
+import { useId, useState } from 'react';
 
 import { Button, Card, CardContent, CardFooter } from '@twpay-qrcode/ui';
 
-import { QRCodePaylaodForm } from './qr-code-payload-form';
+import {
+  QRCodePaylaodForm,
+  type QRCodePayloadFormValues,
+} from './qr-code-payload-form';
+import { TransferQRCodeImage } from './transfer-qr-code-image';
 
 export default function Index() {
   const formId = useId();
+
+  const [values, setValue] = useState<QRCodePayloadFormValues>();
 
   return (
     <main className="container py-16">
@@ -25,8 +31,9 @@ export default function Index() {
           <CardContent>
             <QRCodePaylaodForm
               id={formId}
+              initialValues={values}
               onSubmit={(values) => {
-                console.log('submit', values);
+                setValue(values);
               }}
             />
           </CardContent>
@@ -39,6 +46,29 @@ export default function Index() {
             </Button>
           </CardFooter>
         </Card>
+        {values && (
+          <Card className="w-[385px]">
+            <CardContent>
+              <div className="w-[285px] h-[285px] flex justify-center items-center mx-auto">
+                <TransferQRCodeImage
+                  className="block w-full h-auto"
+                  margin={1}
+                  width={280}
+                  height={280}
+                  payload={{
+                    accountNo: values.accountNo,
+                    amount: values.amount,
+                    bankCode: values.bankCode,
+                    message: values.note,
+                  }}
+                />
+              </div>
+            </CardContent>
+            <CardFooter className="flex justify-start">
+              <Button variant="outline">Back</Button>
+            </CardFooter>
+          </Card>
+        )}
       </div>
     </main>
   );

@@ -2,6 +2,7 @@ import {
   UseFormReturn,
   useForm,
   type ControllerRenderProps,
+  type DeepPartial,
 } from 'react-hook-form';
 import {
   ReactNode,
@@ -27,8 +28,20 @@ export interface QRCodePayloadFormValues {
   note: string;
 }
 
+function initializeFormValues(
+  values?: DeepPartial<QRCodePayloadFormValues>
+): QRCodePayloadFormValues {
+  return {
+    bankCode: values?.bankCode ?? '',
+    accountNo: values?.accountNo ?? '',
+    amount: values?.amount ?? undefined,
+    note: values?.note ?? '',
+  };
+}
+
 export interface QRCodePayloadFormProps
   extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit' | 'children'> {
+  initialValues?: DeepPartial<QRCodePayloadFormValues>;
   onSubmit(values: QRCodePayloadFormValues): void;
   children?:
     | ReactNode
@@ -36,15 +49,17 @@ export interface QRCodePayloadFormProps
 }
 
 export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
-  const { onSubmit, children, className, onReset, ...formProps } = props;
+  const {
+    onSubmit,
+    children,
+    className,
+    onReset,
+    initialValues,
+    ...formProps
+  } = props;
 
   const form = useForm<QRCodePayloadFormValues>({
-    defaultValues: {
-      bankCode: '',
-      accountNo: '',
-      amount: undefined,
-      note: '',
-    },
+    defaultValues: initializeFormValues(initialValues),
   });
 
   return (
@@ -57,7 +72,7 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
 
         if (event.isDefaultPrevented()) return;
 
-        form.reset();
+        form.reset(initializeFormValues());
       }}
       className={cn(
         'grid grid-cols-6 grid-flow-row gap-4 text-right',
