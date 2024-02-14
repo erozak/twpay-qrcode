@@ -1,5 +1,6 @@
 export * from './button';
 export * from './card';
+export * from './collapsible';
 export * from './dialog';
 export * from './drawer';
 export * from './form';
