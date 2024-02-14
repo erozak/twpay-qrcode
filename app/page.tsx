@@ -9,6 +9,7 @@ import {
   type QRCodePayloadFormValues,
 } from './qr-code-payload-form';
 import { TransferQRCodeImage } from './transfer-qr-code-image';
+import { Separator } from '@twpay-qrcode/components/ui';
 
 export default function Index() {
   const formId = useId();
@@ -27,45 +28,49 @@ export default function Index() {
         </p>
       </div>
       <div className="flex justify-center items-center">
-        <Card className="w-[385px]">
-          <CardContent>
-            <QRCodePaylaodForm
-              id={formId}
-              initialValues={values}
-              onSubmit={(values) => {
-                setValue(values);
-              }}
-            />
-          </CardContent>
-          <CardFooter className="flex justify-between">
-            <Button type="reset" variant="ghost" form={formId}>
-              Reset
-            </Button>
-            <Button type="submit" form={formId}>
-              Generate
-            </Button>
-          </CardFooter>
-        </Card>
-        {values && (
-          <Card className="w-[385px]">
-            <CardContent>
-              <TransferQRCodeImage
-                className="mx-auto"
-                size={180}
-                level="L"
-                payload={{
-                  accountNo: values.accountNo,
-                  amount: values.amount,
-                  bankCode: values.bankCode,
-                  message: values.note,
+        <Card className="flex flex-row">
+          <div className="flex flex-col w-[385px]">
+            <CardContent className="flex-1">
+              <QRCodePaylaodForm
+                id={formId}
+                initialValues={values}
+                onSubmit={(values) => {
+                  setValue(values);
                 }}
               />
             </CardContent>
-            <CardFooter className="flex justify-start">
-              <Button variant="outline">Back</Button>
+            <CardFooter className="flex justify-end">
+              <Button type="reset" variant="ghost" form={formId}>
+                Reset
+              </Button>
             </CardFooter>
-          </Card>
-        )}
+          </div>
+          {values && (
+            <>
+              <div className="py-6">
+                <Separator orientation="vertical" />
+              </div>
+              <div className="flex flex-col w-[385px]">
+                <CardContent className="flex flex-1 justify-center items-center">
+                  <TransferQRCodeImage
+                    size={218}
+                    level="L"
+                    payload={{
+                      accountNo: values.accountNo,
+                      amount: values.amount,
+                      bankCode: values.bankCode,
+                      message: values.note,
+                    }}
+                  />
+                </CardContent>
+                <CardFooter className="flex justify-center gap-4">
+                  <Button variant="ghost">Share</Button>
+                  <Button variant="ghost">Download</Button>
+                </CardFooter>
+              </div>
+            </>
+          )}
+        </Card>
       </div>
     </main>
   );
