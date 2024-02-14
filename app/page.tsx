@@ -8,7 +8,7 @@ import {
   QRCodePaylaodForm,
   type QRCodePayloadFormValues,
 } from './qr-code-payload-form';
-import { TransferQRCodeImage } from './transfer-qr-code-image';
+import { TransferQRCode } from './transfer-qr-code';
 import { Separator } from '@twpay-qrcode/components/ui';
 import { cn } from 'utils/cn';
 
@@ -48,7 +48,7 @@ export default function Index() {
             </div>
             <div className="flex flex-col flex-1">
               <CardContent className="flex flex-1 justify-center items-center">
-                <TransferQRCodeImage
+                <TransferQRCode
                   size={218}
                   level="L"
                   payload={{

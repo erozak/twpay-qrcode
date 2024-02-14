@@ -5,15 +5,15 @@ import QRCode, { QRCodeProps } from 'react-qr-code';
 import type { QRCodePayload } from '@twpay-qrcode/models/qr-code-payload/schema';
 import { fromQRCodePayloadToURL } from '@twpay-qrcode/models/qr-code-payload/to-url';
 
-export interface TransferQRCodeImageProps
+export interface TransferQRCodeProps
   extends Omit<QRCodeProps, 'value' | 'ref'> {
   payload: QRCodePayload;
 }
 
-export function TransferQRCodeImage({
+export function TransferQRCode({
   payload,
   ...qrCodeProps
-}: TransferQRCodeImageProps) {
+}: TransferQRCodeProps) {
   const url = fromQRCodePayloadToURL(payload);
 
   return (
