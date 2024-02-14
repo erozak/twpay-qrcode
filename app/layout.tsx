@@ -10,8 +10,9 @@ export const fontSans = FontSans({
 });
 
 export const metadata = {
-  title: 'Taiwan Pay QR Code Generator',
-  description: '',
+  title: 'Howazin',
+  description:
+    'Generate QR code and share it with your friends to make they pay you easily.',
 };
 
 export default function RootLayout({
