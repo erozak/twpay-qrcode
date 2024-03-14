@@ -11,16 +11,7 @@ import {
 } from 'react';
 
 import { cn } from '@twpay-qrcode/utils';
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  Input,
-  Separator,
-} from '@twpay-qrcode/components/ui';
+import { Form, Input, TextField } from '@twpay-qrcode/components/ui';
 
 export interface QRCodePayloadFormValues {
   bankCode: string;
@@ -81,45 +72,33 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
       )}
     >
       <div className="sm:col-span-5 col-span-12">
-        <FormField
+        <TextField
           control={form.control}
           name="bankCode"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Bank code</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="xxx"
-                  {...field}
-                  inputMode="numeric"
-                  pattern="\d*"
-                  className="text-right"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          label="Bank code"
+          input={
+            <Input
+              placeholder="xxx"
+              inputMode="numeric"
+              pattern="\d*"
+              className="text-right"
+            />
+          }
         />
       </div>
       <div className="sm:col-span-7 col-span-12">
-        <FormField
+        <TextField
           control={form.control}
           name="accountNo"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Account no.</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="xxxx xxxx xxxx xxxx"
-                  {...field}
-                  inputMode="numeric"
-                  pattern="\d*"
-                  className="text-right"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          label="Account no."
+          input={
+            <Input
+              placeholder="xxxx xxxx xxxx xxxx"
+              inputMode="numeric"
+              pattern="\d*"
+              className="text-right"
+            />
+          }
         />
       </div>
       <div className="col-span-12 flex gap-4 items-center">
@@ -127,44 +106,32 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
         <span className="text-xs text-muted-foreground">Advanced Options</span>
       </div>
       <div className="col-span-12">
-        <FormField
+        <TextField
           control={form.control}
           name="amount"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Amount</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="0,000"
-                  {...field}
-                  {...intergerMask(field)}
-                  inputMode="numeric"
-                  className="text-right"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+          label="Amount"
+          input={({ field }) => (
+            <Input
+              placeholder="0,000"
+              {...intergerMask(field)}
+              inputMode="numeric"
+              className="text-right"
+            />
           )}
         />
       </div>
       <div className="col-span-12">
-        <FormField
+        <TextField
           control={form.control}
           name="note"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Note</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder="A note for the recipient"
-                  maxLength={19}
-                  className="text-right"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          label="Note"
+          input={
+            <Input
+              placeholder="A note for the recipient"
+              maxLength={19}
+              className="text-right"
+            />
+          }
         />
       </div>
       {typeof children === 'function' ? children(form) : children}
