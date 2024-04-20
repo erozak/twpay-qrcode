@@ -7,6 +7,7 @@ import {
   Center,
   Anchor,
   Container,
+  Button,
 } from '@mantine/core';
 import type { ReactNode } from 'react';
 
@@ -31,13 +32,16 @@ export function AppShell(props: AppShellProps) {
       <MantineAppShell.Footer withBorder={false}>
         <Container py="md">
           <Center>
-            <Link
+            <Button
+              component={Link}
               href="https://github.com/erozak/twpay-qrcode"
               target="_blank"
-              passHref
+              variant="white"
+              color="gray"
+              size="xs"
             >
-              <Anchor>source</Anchor>
-            </Link>
+              source
+            </Button>
           </Center>
         </Container>
       </MantineAppShell.Footer>
