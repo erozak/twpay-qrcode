@@ -1,6 +1,6 @@
 'use client';
 
-import { Container, Text, Space } from '@mantine/core';
+import { Container, Text, Space, Button, Grid, Group } from '@mantine/core';
 
 // import { useId, useState } from 'react';
 
@@ -90,6 +90,16 @@ export default function Index() {
           onSubmit={(values) => {
             console.log('!!', values);
           }}
+          actions={() => (
+            <Grid.Col span={12}>
+              <Group justify="flex-end">
+                <Button type="reset" variant="default">
+                  Reset
+                </Button>
+                <Button type="submit">Generate</Button>
+              </Group>
+            </Grid.Col>
+          )}
         />
       </Container>
     </>

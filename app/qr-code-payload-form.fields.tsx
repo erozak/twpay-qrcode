@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import { useController } from 'react-hook-form';
 import {
   IconCircleCheckFilled,
@@ -24,12 +23,19 @@ import { useDisclosure, useUncontrolled } from '@mantine/hooks';
 
 export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
   const length = 3;
-  const { field, fieldState } = useController({
+  const { field, fieldState, formState } = useController({
     control: props.control,
     name: 'bankCode',
     rules: {
-      minLength: length,
-      maxLength: length,
+      required: 'Required field',
+      minLength: {
+        value: length,
+        message: `Must be ${length} characters`,
+      },
+      maxLength: {
+        value: length,
+        message: `Must be ${length} characters`,
+      },
     },
   });
   const [value, handleChange] = useUncontrolled<string | number | undefined>({
@@ -55,6 +61,8 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
     return options[0];
   })();
 
+  console.log('!!', fieldState.error);
+
   return (
     <Combobox
       onOptionSubmit={(optionValue) => {
@@ -68,18 +76,23 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
           required
           label="Bank code"
           placeholder="xxx"
+          name={field.name}
           inputMode="numeric"
           pattern="\d*"
           maxLength={length}
           minLength={length}
           value={value}
+          ref={field.ref}
           rightSection={
             <BankCodeRecognizedIndicator
               disabled={!canFindActiveOption}
               activeItem={activeOption}
             />
           }
-          error={fieldState.error?.message}
+          error={
+            (fieldState.isTouched || formState.isSubmitted) &&
+            fieldState.error?.message
+          }
           onChange={(event) => {
             handleChange(event.target.value);
             combobox.openDropdown();
@@ -93,6 +106,7 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
           }}
           onBlur={() => {
             combobox.closeDropdown();
+            field.onBlur();
           }}
         />
       </Combobox.Target>
@@ -168,33 +182,47 @@ export function AccountNumberField(props: {
   control?: QRCodePayloadFormControl;
 }) {
   const rules = { minLength: 1, maxLength: 16 };
-  const { field, fieldState } = useController({
+  const { field, fieldState, formState } = useController({
     control: props.control,
     name: 'accountNo',
-    rules,
+    rules: {
+      required: 'Required field',
+      minLength: {
+        value: rules.minLength,
+        message: `Must be at least ${rules.minLength} characters`,
+      },
+      maxLength: {
+        value: rules.maxLength,
+        message: `Must be at most ${rules.maxLength} characters`,
+      },
+    },
   });
 
   const [value, handleChange] = useUncontrolled<string | number | undefined>({
     value: field.value,
-    finalValue: '',
     onChange: field.onChange,
   });
 
   return (
     <TextInput
       required
-      name="accountNo"
+      name={field.name}
       label="Account no."
       placeholder="xxxx xxxx xxxx xxxx"
       inputMode="numeric"
       pattern="\d*"
+      ref={field.ref}
       minLength={rules.minLength}
       maxLength={rules.maxLength}
       value={value}
       onChange={(event) => {
         handleChange(event.target.value);
       }}
-      error={fieldState.error?.message}
+      error={
+        (fieldState.isTouched || formState.isSubmitted) &&
+        fieldState.error?.message
+      }
+      onBlur={field.onBlur}
     />
   );
 }
@@ -205,18 +233,28 @@ export function AmountField(props: { control?: QRCodePayloadFormControl }) {
   const { field, fieldState } = useController({
     control: props.control,
     name: 'amount',
-    rules: rules,
+    rules: {
+      min: {
+        value: rules.min,
+        message: `Must be greater than ${rules.min - 1}`,
+      },
+      max: {
+        value: rules.max,
+        message: `Must be less than ${rules.max + 1}`,
+      },
+    },
   });
 
   const [value, handleChange] = useUncontrolled<string | number | undefined>({
     value: field.value,
-    finalValue: '',
-    onChange: field.onChange,
+    onChange: (val) => {
+      field.onChange(val);
+    },
   });
 
   return (
     <NumberInput
-      name="amount"
+      name={field.name}
       label="Amount"
       inputMode="numeric"
       placeholder="000,000"
@@ -230,6 +268,7 @@ export function AmountField(props: { control?: QRCodePayloadFormControl }) {
       value={value}
       onChange={handleChange}
       error={fieldState.error?.message}
+      onBlur={field.onBlur}
     />
   );
 }
@@ -240,18 +279,22 @@ export function MessageField(props: { control?: QRCodePayloadFormControl }) {
   const { field, fieldState } = useController({
     control: props.control,
     name: 'message',
-    rules,
+    rules: {
+      maxLength: {
+        value: rules.maxLength,
+        message: `Must be at most ${rules.maxLength} characters`,
+      },
+    },
   });
 
   const [value, handleChange] = useUncontrolled<string | number | undefined>({
     value: field.value,
-    finalValue: '',
     onChange: field.onChange,
   });
 
   return (
     <TextInput
-      name="message"
+      name={field.name}
       label="Message"
       placeholder="A message for the recipient"
       value={value}
@@ -260,6 +303,7 @@ export function MessageField(props: { control?: QRCodePayloadFormControl }) {
       }}
       error={fieldState.error?.message}
       maxLength={rules.maxLength}
+      onBlur={field.onBlur}
     />
   );
 }

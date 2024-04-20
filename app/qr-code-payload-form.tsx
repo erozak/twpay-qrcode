@@ -25,6 +25,17 @@ export interface QRCodePayloadFormValues {
 
 export type QRCodePayloadFormControl = Control<QRCodePayloadFormValues>;
 
+export function initializeQRCodePayloadFormValues(
+  source: DeepPartial<QRCodePayloadFormValues> = {},
+): QRCodePayloadFormValues {
+  return {
+    bankCode: source.bankCode || '',
+    accountNo: source.accountNo || '',
+    amount: source.amount ?? undefined,
+    message: source.message || '',
+  };
+}
+
 export interface QRCodePayloadFormProps
   extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit' | 'children'> {
   initialValues?: DeepPartial<QRCodePayloadFormValues>;
@@ -39,7 +50,8 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
     props;
 
   const form = useForm<QRCodePayloadFormValues>({
-    defaultValues: initialValues,
+    defaultValues: initializeQRCodePayloadFormValues(initialValues),
+    criteriaMode: 'all',
   });
 
   return (
@@ -52,6 +64,7 @@ export function QRCodePaylaodForm(props: QRCodePayloadFormProps) {
           <form
             {...props}
             {...formProps}
+            noValidate
             onSubmit={form.handleSubmit(onSubmit)}
             onReset={(event) => {
               onReset?.(event);
