@@ -220,6 +220,11 @@ export function AmountField(props: { control?: QRCodePayloadFormControl }) {
       label="Amount"
       inputMode="numeric"
       placeholder="000,000"
+      step={1}
+      allowDecimal={false}
+      allowNegative={false}
+      prefix="NT$"
+      thousandSeparator=","
       min={rules.min}
       max={rules.max}
       value={value}
