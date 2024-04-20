@@ -68,6 +68,7 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
           required
           label="Bank code"
           placeholder="xxx"
+          inputMode="numeric"
           pattern="\d*"
           maxLength={length}
           minLength={length}
@@ -93,7 +94,6 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
           onBlur={() => {
             combobox.closeDropdown();
           }}
-          inputMode="numeric"
         />
       </Combobox.Target>
       <Combobox.Dropdown>
