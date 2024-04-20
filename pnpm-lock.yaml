@@ -41,6 +41,9 @@ importers:
       '@swc/helpers':
         specifier: ~0.5.8
         version: 0.5.8
+      '@tabler/icons-react':
+        specifier: ^3.2.0
+        version: 3.2.0(react@18.2.0)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -1720,6 +1723,14 @@ packages:
   '@szmarczak/http-timer@4.0.6':
     resolution: {integrity: sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==}
     engines: {node: '>=10'}
+
+  '@tabler/icons-react@3.2.0':
+    resolution: {integrity: sha512-b1mZT1XpZrzvbM+eFe1YbYbxkzgJ18tM4knZKqXh0gnHDZ6XVLIH3TzJZ3HZ7PTkUqZLZ7XcGae3qQVGburlBw==}
+    peerDependencies:
+      react: '>= 16'
+
+  '@tabler/icons@3.2.0':
+    resolution: {integrity: sha512-h8GQ2rtxgiSjltrVz4vcopAxTPSpUSUi5nBfJ09H3Bk4fJk6wZ/dVUjzhv/BHfDwGTkAxZBiYe/Q/T95cPeg5Q==}
 
   '@testing-library/dom@9.3.4':
     resolution: {integrity: sha512-FlS4ZWlp97iiNWig0Muq8p+3rVDjRiYE+YKGbAqXOu9nwJFFOdL00kFpz42M+4huzYi86vAK1sOOfyOG45muIQ==}
@@ -8373,6 +8384,13 @@ snapshots:
   '@szmarczak/http-timer@4.0.6':
     dependencies:
       defer-to-connect: 2.0.1
+
+  '@tabler/icons-react@3.2.0(react@18.2.0)':
+    dependencies:
+      '@tabler/icons': 3.2.0
+      react: 18.2.0
+
+  '@tabler/icons@3.2.0': {}
 
   '@testing-library/dom@9.3.4':
     dependencies:
