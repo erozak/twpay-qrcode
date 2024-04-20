@@ -29,6 +29,9 @@
       ],
       "@twpay-qrcode/models/*": [
         "models/*"
+      ],
+      "@twpay-qrcode/generated/*": [
+        "generated/*"
       ]
     }
   },
