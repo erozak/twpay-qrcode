@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "gen-bank-codes": "node ./scripts/gen-bank-codes.mjs"
   },
   "private": true,
   "dependencies": {
