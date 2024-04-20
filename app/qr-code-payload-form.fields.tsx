@@ -20,7 +20,7 @@ import {
 import BANK_CODES from '@twpay-qrcode/generated/bank-codes.json';
 
 import type { QRCodePayloadFormControl } from './qr-code-payload-form';
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure, useUncontrolled } from '@mantine/hooks';
 
 export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
   const length = 3;
@@ -32,6 +32,12 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
       maxLength: length,
     },
   });
+  const [value, handleChange] = useUncontrolled<string | number | undefined>({
+    value: field.value,
+    finalValue: '',
+    onChange: field.onChange,
+  });
+
   const combobox = useCombobox();
 
   const options = field.value
@@ -52,7 +58,7 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
   return (
     <Combobox
       onOptionSubmit={(optionValue) => {
-        field.onChange(optionValue);
+        handleChange(optionValue);
         combobox.closeDropdown();
       }}
       store={combobox}
@@ -65,7 +71,7 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
           pattern="\d*"
           maxLength={length}
           minLength={length}
-          value={field.value || ''}
+          value={value}
           rightSection={
             <BankCodeRecognizedIndicator
               disabled={!canFindActiveOption}
@@ -74,7 +80,7 @@ export function BankCodeField(props: { control?: QRCodePayloadFormControl }) {
           }
           error={fieldState.error?.message}
           onChange={(event) => {
-            field.onChange(event);
+            handleChange(event.target.value);
             combobox.openDropdown();
             combobox.updateSelectedOptionIndex();
           }}
@@ -168,6 +174,12 @@ export function AccountNumberField(props: {
     rules,
   });
 
+  const [value, handleChange] = useUncontrolled<string | number | undefined>({
+    value: field.value,
+    finalValue: '',
+    onChange: field.onChange,
+  });
+
   return (
     <TextInput
       required
@@ -178,8 +190,10 @@ export function AccountNumberField(props: {
       pattern="\d*"
       minLength={rules.minLength}
       maxLength={rules.maxLength}
-      value={field.value || ''}
-      onChange={field.onChange}
+      value={value}
+      onChange={(event) => {
+        handleChange(event.target.value);
+      }}
       error={fieldState.error?.message}
     />
   );
@@ -194,6 +208,12 @@ export function AmountField(props: { control?: QRCodePayloadFormControl }) {
     rules: rules,
   });
 
+  const [value, handleChange] = useUncontrolled<string | number | undefined>({
+    value: field.value,
+    finalValue: '',
+    onChange: field.onChange,
+  });
+
   return (
     <NumberInput
       name="amount"
@@ -202,8 +222,8 @@ export function AmountField(props: { control?: QRCodePayloadFormControl }) {
       placeholder="000,000"
       min={rules.min}
       max={rules.max}
-      value={field.value || ''}
-      onChange={field.onChange}
+      value={value}
+      onChange={handleChange}
       error={fieldState.error?.message}
     />
   );
@@ -218,13 +238,21 @@ export function MessageField(props: { control?: QRCodePayloadFormControl }) {
     rules,
   });
 
+  const [value, handleChange] = useUncontrolled<string | number | undefined>({
+    value: field.value,
+    finalValue: '',
+    onChange: field.onChange,
+  });
+
   return (
     <TextInput
       name="message"
       label="Message"
       placeholder="A message for the recipient"
-      value={field.value || ''}
-      onChange={field.onChange}
+      value={value}
+      onChange={(event) => {
+        handleChange(event.target.value);
+      }}
       error={fieldState.error?.message}
       maxLength={rules.maxLength}
     />
